@@ -1,16 +1,16 @@
 import os
 import pandas as pd
-import logging
+from logger import logging
 
 class PatientDataMerger:
-    def __init__(self, main_folder, output_file="artifacts/merged_patient_data.csv", log_file="merge_logs.log", max_rows=50):
+    def __init__(self, main_folder, output_file="artifacts/merged_patient_data.csv", max_rows=50):
         self.main_folder = main_folder
         self.output_file = output_file
-        self.log_file = log_file
+        
         self.max_rows = max_rows
         self.all_patients_data = []
         
-        logging.basicConfig(filename=self.log_file, level=logging.INFO, 
+        logging.basicConfig(level=logging.INFO, 
                             format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("Patient Data Merger initialized.")
     
