@@ -8,7 +8,7 @@ from src.data_merging import PatientDataMerger
 from src.data_preprocessing import PatientDataPreprocessor
 
 class PatientMonitoringApp:
-    def __init__(self, data_file="merged_patient_data.csv", model_dir="artifacts/models", seq_length=5, refresh_interval=120, main_folder="data"):
+    def __init__(self, data_file="artifacts/merged_patient_data.csv", model_dir="artifacts/models", seq_length=5, refresh_interval=120, main_folder="data"):
         self.data_file = data_file
         self.model_dir = model_dir
         self.seq_length = seq_length
