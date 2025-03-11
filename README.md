@@ -3,6 +3,11 @@
 ### 🚀 Real-Time Patient Monitoring using Wearable Data, Lab Records & LSTM Prediction
 
 ---
+## 📸 Screenshots
+### 🟥 Real-Time Patient Monitoring Dashboard
+![healthmonitoring](https://github.com/user-attachments/assets/5607c3cb-e169-4ec6-8450-494a577dd342)
+
+---
 
 ## 📌 Overview
 This project integrates **wearable device readings (Blood Pressure, Blood Sugar)** and **lab records** to provide **real-time health monitoring**. It employs an **LSTM model** to predict the next sequence of patient vitals, generating **alerts for doctors** when abnormalities are detected.  
@@ -62,11 +67,7 @@ The system automatically triggers **alerts for doctors** if values go **beyond n
 
 ---
 
-## 📸 Screenshots
-### 🟥 Real-Time Patient Monitoring Dashboard
-![Patient Monitoring UI](![alt text](image.png))
 
----
 
 ## 🚀 How to Run
 1. **Clone the repository**
