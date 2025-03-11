@@ -42,11 +42,11 @@ class PatientDataMerger:
                 
                 
                 
-                # Sort by Timestamp in descending order (most recent first)
+                
                 merged_df = merged_df.sort_values(by=["Patient_ID", "Date"], ascending=False)
                 merged_df[list(existing_columns)] = merged_df[list(existing_columns)].ffill()
                 
-                # Keep only the most recent max_rows per patient
+                
                 merged_df = merged_df.groupby("Patient_ID").head(self.max_rows)
                 
                 self.all_patients_data.append(merged_df)
@@ -70,6 +70,6 @@ class PatientDataMerger:
 
 # Example usage
 if __name__ == "__main__":
-    main_folder = "D:\\EDrivebackup/brocamp\\DataScienceProjects\\bw2_prj\\HealthMonitoring\\data"
+    main_folder = "data"
     merger = PatientDataMerger(main_folder)
     merger.run()

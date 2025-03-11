@@ -177,13 +177,8 @@ class PatientMonitoringApp:
             logging.warning("No predictions available. Check if patient models exist.")
             st.warning("No predictions available. Ensure patient models exist.")
 
-        st.markdown(f"""
-            <script>
-            setTimeout(function() {{
-                window.location.reload();
-            }}, {self.refresh_interval * 1000});
-            </script>
-        """, unsafe_allow_html=True)
+        time.sleep(self.refresh_interval)  # Wait before refreshing
+        st.rerun()
 
     def run(self):
         """Runs the full pipeline."""
@@ -200,5 +195,8 @@ class PatientMonitoringApp:
 
 
 if __name__ == "__main__":
-    app = PatientMonitoringApp()
-    app.run()
+    try:
+        app = PatientMonitoringApp()
+        app.run()
+    except HealthMonitoringException as e:
+        logging.critical(f"Critical application failure: {e}")

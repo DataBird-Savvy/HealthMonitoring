@@ -64,7 +64,7 @@ The system automatically triggers **alerts for doctors** if values go **beyond n
 
 ## 📸 Screenshots
 ### 🟥 Real-Time Patient Monitoring Dashboard
-![Patient Monitoring UI](https://your-image-link.png)
+![Patient Monitoring UI](![alt text](image.png))
 
 ---
 
