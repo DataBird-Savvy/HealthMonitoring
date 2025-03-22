@@ -1,95 +1,98 @@
-# 🏥 Health Monitoring System - AI-Powered Patient Alerts
-
-### 🚀 Real-Time Patient Monitoring using Wearable Data, Lab Records & LSTM Prediction
 
 ---
 ## 📸 Screenshots
 ### 🟥 Real-Time Patient Monitoring Dashboard
-![healthmonitoring](https://github.com/user-attachments/assets/5607c3cb-e169-4ec6-8450-494a577dd342)
+![image](https://github.com/user-attachments/assets/4f108c26-d377-44a6-b149-6e405e989b9d)
 
----
+
+# 🏥 Patient Health Monitoring System
 
 ## 📌 Overview
-This project integrates **wearable device readings (Blood Pressure, Blood Sugar)** and **lab records** to provide **real-time health monitoring**. It employs an **LSTM model** to predict the next sequence of patient vitals, generating **alerts for doctors** when abnormalities are detected.  
+This project integrates **wearable device readings (Blood Pressure, Blood Sugar, etc.)** and **lab records** to provide **real-time health monitoring**. It employs an **LSTM-based deep learning model** to predict patient vitals and generate **alerts for doctors** when abnormalities are detected.
 
-### 🔑 Key Features
-- ✅ **Wearable Data Integration** - Monitors **BP, Blood Sugar, Heart Rate, Oxygen Saturation, etc.**  
-- ✅ **Lab Record Merging** - Combines periodic lab results like **Hemoglobin, Cholesterol, WBC Count, etc.**  
-- ✅ **LSTM-Based Prediction** - Forecasts the **next sequence** of patient vitals for early detection  
-- ✅ **Automated Alerts** - Flags abnormal readings & alerts doctors with **color-coded reports**  
-- ✅ **Streamlit Dashboard** - Live monitoring with **auto-refresh every 5 minutes**  
+## 🔑 Key Features
+- ✅ **Wearable Data Integration** - Monitors **Blood Pressure, Blood Sugar, Heart Rate, Oxygen Saturation, etc.**
+- ✅ **Lab Record Merging** - Combines periodic lab results like **Hemoglobin, Cholesterol, WBC Count, etc.**
+- ✅ **LSTM-Based Prediction** - Forecasts the **next sequence** of patient vitals for early detection.
+- ✅ **Automated Alerts** - Flags abnormal readings & alerts doctors with **color-coded reports**.
+- ✅ **Interactive Dashboard** - Built using **Streamlit** for real-time monitoring.
+
+## 🚀 Setup & Installation
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/PatientHealthMonitor.git
+cd PatientHealthMonitor
+```
+### 2️⃣ Create a Virtual Environment (Optional but Recommended)
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+### 3️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+### 4️⃣ Setup Environment Variables
+Create a `.env` file in the root directory and add:
+```env
+MERGED_DATA_PATH=data/merged_data.csv
+ENCODER_PATH=models/encoder.pkl
+SCALER_PATH=models/scaler.pkl
+MODEL_PATH=models/lstm_model.h5
+```
+
+### 5️⃣ Run the Streamlit Dashboard
+```bash
+streamlit run app.py
+```
+
+## 📊 LSTM Model Architecture
+The model predicts the next sequence of patient vitals using **Bidirectional LSTM layers** with **dropout regularization**:
+```python
+model = Sequential([
+    Bidirectional(LSTM(128, activation='tanh', return_sequences=True, kernel_regularizer=l2(0.01)), input_shape=(30, X.shape[2])),
+    LayerNormalization(),
+    Dropout(0.2),
+    Bidirectional(LSTM(64, activation='tanh', return_sequences=True)),
+    BatchNormalization(),
+    Dropout(0.2),
+    Bidirectional(LSTM(32, activation='tanh')),
+    LayerNormalization(),
+    Dropout(0.2),
+    Dense(X.shape[2])
+])
+
+model.compile(optimizer=AdamW(learning_rate=0.001), loss='mae')
+```
+
+## 📢 Alerts & Critical Thresholds
+If a patient's predicted vitals exceed predefined thresholds, the system generates alerts:
+| Feature | Normal Range |
+|---------|-------------|
+| Blood Glucose | 70 - 140 mg/dL |
+| Oxygen (SpO₂) | 90 - 100% |
+| ECG | 0.5 - 1.5 |
+| Heart Rate | 50 - 110 bpm |
+| Respiratory Rate | 12 - 20 breaths/min |
+| Body Temperature | 36.1 - 37.8°C |
+
+## 🛠️ Technologies Used
+- **Python** (Data Processing, Model Training)
+- **TensorFlow / Keras** (LSTM Model)
+- **Scikit-Learn** (Preprocessing & Feature Scaling)
+- **Streamlit** (Dashboard for Visualization)
+- **Pandas / NumPy** (Data Manipulation)
+- **Joblib** (Model Serialization)
+
+## 🤝 Contributing
+Feel free to contribute! Fork the repository and submit a **pull request**.
+
+## 📜 License
+This project is **MIT Licensed**. See `LICENSE` for details.
 
 ---
+✨ **Developed with ❤️ by jiya** ✨
 
-## 🛠️ Tech Stack
-- **Python** (Pandas, NumPy, TensorFlow/Keras, Scikit-learn)  
-- **Streamlit** (Real-time dashboard for patient monitoring)  
-- **LSTM (Long Short-Term Memory)** - Time-series prediction model  
-- **MongoDB** (For storing patient records)  
-- **Matplotlib/Seaborn** (Data visualization)  
-
----
-
-## 📂 Data Sources
-- **Wearable Device Data**: Continuous BP, Glucose, HR, SpO₂  
-- **Lab Records**: Periodic lab test reports (Hemoglobin, WBC Count, etc.)  
-- **Historical Patient Data**: Used for LSTM training  
-
----
-
-## 📊 Model Training - LSTM
-The **LSTM model** predicts the **next sequence** of patient vitals based on historical data.  
-### Training Steps:
-1. **Data Preprocessing** - Filling missing values, normalizing sensor data  
-2. **Sequence Generation** - Creating time-series input for LSTM  
-3. **Model Training** - Using **TensorFlow/Keras LSTM**  
-4. **Prediction** - Generating future vitals & checking alert thresholds  
-
----
-
-## 🚨 Alert System - Thresholds
-The system automatically triggers **alerts for doctors** if values go **beyond normal thresholds**:
-
-| Parameter              | Normal Range |
-|------------------------|--------------|
-| Systolic BP           | 90 - 120 mmHg |
-| Diastolic BP          | 60 - 80 mmHg  |
-| Blood Sugar (Glucose) | 70 - 140 mg/dL |
-| Oxygen Saturation (SpO₂) | 95 - 100% |
-| Heart Rate            | 60 - 100 bpm |
-| Temperature           | 36.1 - 37.5°C |
-| Respiratory Rate      | 12 - 20 breaths/min |
-| Electrocardiogram (ECG) | 0.88 - 1.02 |
-| Hydration Level       | 55 - 65% |
-
-🛥️ **Red Highlight** = Critical Alert  
-🟩 **Green Highlight** = Normal  
-
----
-
-
-
-## 🚀 How to Run
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/HealthMonitoringSystem.git
-   cd HealthMonitoringSystem
-   ```
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Run the Streamlit App**
-   ```bash
-   streamlit run app.py
-   ```
-
----
-
-## 📈 Future Improvements
-- 🛠️ **Real-time IoT Device Integration** for direct sensor streaming  
-- ⚖️ **Edge Computing** for low-latency health monitoring  
-- 📢 **Doctor-Patient Communication System** via alerts  
 
 ---
 
