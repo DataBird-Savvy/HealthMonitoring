@@ -141,3 +141,5 @@ class PatientHealthMonitor:
 if __name__ == "__main__":
     monitor = PatientHealthMonitor()
     monitor.run_dashboard()
+    time.sleep(600)  # Wait for 10 minutes
+    st.rerun()
