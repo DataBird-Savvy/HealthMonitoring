@@ -2,7 +2,8 @@
 ---
 ## 📸 Screenshots
 ### 🟥 Real-Time Patient Monitoring Dashboard
-![image](https://github.com/user-attachments/assets/4f108c26-d377-44a6-b149-6e405e989b9d)
+![heathmonitor](https://github.com/user-attachments/assets/49136bed-aa50-41fc-a8e9-78f391f0bed4)
+
 
 
 # 🏥 Patient Health Monitoring System
