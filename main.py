@@ -5,10 +5,11 @@ import joblib
 import streamlit as st
 from logger import logging
 from tensorflow.keras.models import load_model
+import time
 from dotenv import load_dotenv
 from src.data_preprocessing import DataPreprocessor
 
-# Load environment variables
+
 load_dotenv()
 
 
@@ -112,9 +113,10 @@ class PatientHealthMonitor:
 
     def run_dashboard(self):
         """Run the Streamlit dashboard."""
+        
         logging.info("Starting Streamlit dashboard...")
-        st.set_page_config(page_title="Patient Health Monitoring", layout="wide")
-        st.title("🏥 Patient Health Monitoring Dashboard")
+        st.set_page_config(page_title="Early Health Monitoring", layout="wide")
+        st.title("🏥 Early Health Monitoring Dashboard")
 
         predictions, alerts = self.make_predictions()
 
@@ -136,8 +138,12 @@ class PatientHealthMonitor:
             st.write("---")  
 
         logging.info("Dashboard rendered successfully.")
+        time.sleep(600)  # Wait for 10 minutes
+        st.experimental_rerun()
 
 
 if __name__ == "__main__":
     monitor = PatientHealthMonitor()
     monitor.run_dashboard()
+    time.sleep(600)  # Wait for 10 minutes
+    st.rerun()
