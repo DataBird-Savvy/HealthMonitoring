@@ -9,18 +9,19 @@ class DataPreprocessor:
         self.file_path = file_path
         self.encoder_path = encoder_path
         self.scaler_path = scaler_path
-        self.df = None  # Placeholder for DataFrame
+        self.df = None  
 
     def load_data(self):
         """Load CSV data into a DataFrame."""
         self.df = pd.read_csv(self.file_path)
+        self.df=self.df.drop(['patient_id_x','patient_id_y','timestamp_x','timestamp_y'],axis=1)
         return self.df
 
     def process_timestamp(self):
         """Convert Date & Time columns into a Timestamp and drop original columns."""
         if 'Date' in self.df.columns and 'Time' in self.df.columns:
             self.df['Timestamp'] = pd.to_datetime(
-                self.df['Date'] + ' ' + self.df['Time'], format='%d-%m-%Y %H.%M.%S'
+                self.df['Date'] + ' ' + self.df['Time'], format='%d-%m-%Y %H.%M.%S',errors="coerce"
             )
             self.df.drop(columns=['Date', 'Time'], inplace=True)
 
@@ -52,6 +53,10 @@ class DataPreprocessor:
         self.scale_features()
         return self.df_scaled
 
-# Example Usage
-# preprocessor = DataPreprocessor("data.csv", "encoder.pkl", "scaler.pkl")
-# df_scaled = preprocessor.preprocess()
+if __name__=="__main__":
+    
+    merged_data_path="artifacts/merged_patient_kafka_data.csv"
+    
+    preprocessor = DataPreprocessor(merged_data_path, "artifacts/encoder.pkl", "artifacts/scaler.pkl")
+    df_scaled = preprocessor.preprocess()
+    

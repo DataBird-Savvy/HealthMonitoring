@@ -138,12 +138,12 @@ class PatientHealthMonitor:
             st.write("---")  
 
         logging.info("Dashboard rendered successfully.")
-        time.sleep(600)  # Wait for 10 minutes
-        st.experimental_rerun()
+        # time.sleep(600)  
+        # st.experimental_rerun()
 
 
 if __name__ == "__main__":
     monitor = PatientHealthMonitor()
     monitor.run_dashboard()
-    time.sleep(600)  # Wait for 10 minutes
-    st.rerun()
+    # time.sleep(600)  
+    # st.rerun()

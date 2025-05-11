@@ -2,3 +2,6 @@ tensorflow
 streamlit
 scikit-learn
 python-dotenv
+kafka-python 
+pandas
+evidently==0.6.4
